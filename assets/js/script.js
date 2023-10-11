@@ -30,8 +30,8 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
                                             5-Day Forecast:`;
 
                     var forecastList = forecastData.list;
-                    for (var i = 0; i < forecastList.length; 1 += 8) {
-                        var forecast = forecaseList[i];
+                    for (var i = 0; i < forecastList.length; i += 8) {
+                        var forecast = forecastList[i];
                         var date = new Date(forecast.dt * 1000);
                         weatherInfo.innerHTML += `<br>Date: ${date.toDateString()}<br>
                                                 Temperature: ${forecast.main.temp} K<br>
