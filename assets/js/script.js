@@ -1,4 +1,5 @@
 var APIKey = "4b7f4787db0f7660827d3ad9e61764da";
+var searchHistory = [];
 
 document.getElementById("searchForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -15,6 +16,11 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
             return response.json();
         })
         .then(currentWeatherData => {
+            if (!searchHistory.includes(city)) {
+                searchHistory.push(city);
+                updateSearchHistory();
+            }
+
             return fetch(forecastURL)
                 .then(response => {
                     if (!response.ok) {
@@ -43,3 +49,17 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
             console.error('There has been a problem with your fetch operation:', error);
         });
 });
+
+function updateSearchHistory() {
+    var searchHistoryContainer = document.getElementById("searchHistory");
+    searchHistoryContainer.innerHTML = "";
+    searchHistory.forEach(city => {
+        var button = document.createElement("button");
+        button.textContent = city;
+        button.addEventListener("click", function() {
+            // Fetch and display both current weather and forecast for the clicked city
+            fetchWeatherData(city);
+        });
+        searchHistoryContainer.appendChild(button);
+    });
+}
