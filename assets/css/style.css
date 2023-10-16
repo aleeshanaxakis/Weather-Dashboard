@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    padding: 10px;
 }
 
 aside {
@@ -32,6 +33,7 @@ aside {
 
 #weatherInfo {
     width: 75%;
+    margin: 10px;
 }
 
 #current-weather {
