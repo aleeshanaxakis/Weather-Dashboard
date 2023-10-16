@@ -1,10 +1,15 @@
+// OpenWeatherMap API key 
 var APIKey = "4b7f4787db0f7660827d3ad9e61764da";
+
+// Array to store search history
 var searchHistory = [];
 
+// Function to fetch weather data for a specific city
 function fetchWeatherData (city) {
     var currentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(city) + "&appid=" + APIKey;
     var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + encodeURIComponent(city) + "&appid=" + APIKey;
 
+    // Fetch current weather data
     fetch(currentWeatherURL)
         .then(response => {
             if (!response.ok) {
@@ -13,11 +18,13 @@ function fetchWeatherData (city) {
             return response.json();
         })
         .then(currentWeatherData => {
+            // Update search history and display weather information
             if (!searchHistory.includes(city)) {
                 searchHistory.push(city);
                 updateSearchHistory();
             }
 
+            // Fetch forecast data
             return fetch(forecastURL)
                 .then(response => response.json())
                 .then(forecastData => {
@@ -62,7 +69,7 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         var windSpeed = forecast.wind.speed;
         var icon = forecast.weather[0].icon;
         console.log(icon);
-        weatherInfo.innerHTML += `<br>Date: ${date.toDateString()}<br> <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/>
+        weatherInfo.innerHTML += `<br>${date.toDateString()}<br> <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/>
                                 <p>Temperature: ${temperature} K</p>
                                 <p>Wind: ${windSpeed} m/s</p>
                                 <p>Humidity: ${humidity}%</p>`
