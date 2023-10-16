@@ -44,7 +44,7 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
 });    
 
     function updateWeatherInfo(currentWeatherData, forecastData) {
-        var weatherInfo = document.getElementById("weatherInfo");
+        var weatherInfo = document.getElementById("current-weather");
         var city = currentWeatherData.name;
         var currentDate = dayjs().format('MM/DD/YYYY');
         var temperature = currentWeatherData.main.temp;
@@ -56,10 +56,11 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         weatherInfo.innerHTML = `<h2>${city} (${currentDate}) <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/> </h2>
                                 <p>Temperature: ${temperature} K</p>
                                 <p>Wind: ${windSpeed} m/s</p>
-                                <p>Humidity: ${humidity}%</p>
-                                5-Day Forecast:`;
+                                <p>Humidity: ${humidity}%</p>`;
+                                
         console.log(forecastData);
 
+        var forecastInfo = document.getElementById("forecast");
         var forecastList = forecastData.list;
         for (var i = 0; i < forecastList.length; i += 8) {
         var forecast = forecastList[i];
@@ -69,7 +70,8 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         var windSpeed = forecast.wind.speed;
         var icon = forecast.weather[0].icon;
         console.log(icon);
-        weatherInfo.innerHTML += `<br>${date.toDateString()}<br> <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/>
+        forecastInfo.innerHTML += `<h2> 5-Day Forecast:<br>${date.toDateString()}<br> </h2>
+                                <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/>
                                 <p>Temperature: ${temperature} K</p>
                                 <p>Wind: ${windSpeed} m/s</p>
                                 <p>Humidity: ${humidity}%</p>`

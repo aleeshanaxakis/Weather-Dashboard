@@ -1,5 +1,21 @@
+.container {
+    display: flex;
+}
+
 aside {
     width: 250px;
+}
+
+#weatherInfo {
+    width: 750px;
+}
+
+#current-weather {
+    border: 2px solid black
+}
+
+#forecast {
+
 }
 
 .header {
