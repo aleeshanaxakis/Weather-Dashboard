@@ -1,10 +1,7 @@
 var APIKey = "4b7f4787db0f7660827d3ad9e61764da";
 var searchHistory = [];
 
-document.getElementById("searchForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    var city = document.getElementById("cityInput").value;
+function fetchWeatherData (city) {
     var currentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(city) + "&appid=" + APIKey;
     var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + encodeURIComponent(city) + "&appid=" + APIKey;
 
@@ -30,6 +27,13 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
                 console.error('There has been a problem with your fetch operation:', error);
             });
         });
+}
+
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var city = document.getElementById("cityInput").value;
+    fetchWeatherData(city)
 });    
 
     function updateWeatherInfo(currentWeatherData, forecastData) {
@@ -71,9 +75,10 @@ function updateSearchHistory() {
     searchHistory.forEach(city => {
         var button = document.createElement("button");
         button.textContent = city;
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function(event) {
+            var cityName = event.target.textContent;
             // Fetch and display both current weather and forecast for the clicked city
-            fetchWeatherData(city);
+            fetchWeatherData(cityName);
         });
         searchHistoryContainer.appendChild(button);
     });
