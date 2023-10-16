@@ -22,33 +22,48 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
             }
 
             return fetch(forecastURL)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(forecastData => {
-                    var weatherInfo = document.getElementById("weatherInfo");
-                    weatherInfo.innerHTML = `City: ${currentWeatherData.name}<br>
-                                            Temperature: ${currentWeatherData.main.temp} K<br>
-                                            Weather: ${currentWeatherData.weather[0].description}<br><br>
-                                            5-Day Forecast:`;
-
-                    var forecastList = forecastData.list;
-                    for (var i = 0; i < forecastList.length; i += 8) {
-                        var forecast = forecastList[i];
-                        var date = new Date(forecast.dt * 1000);
-                        weatherInfo.innerHTML += `<br>Date: ${date.toDateString()}<br>
-                                                Temperature: ${forecast.main.temp} K<br>
-                                                Weather: ${forecast.weather[0].description}<br><br>`;
-                    }
+                    updateWeatherInfo(currentWeatherData, forecastData);
                 })
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
         });
-});
+});    
+
+    function updateWeatherInfo(currentWeatherData, forecastData) {
+        var weatherInfo = document.getElementById("weatherInfo");
+        var city = currentWeatherData.name;
+        var currentDate = dayjs().format('MM/DD/YYYY');
+        var temperature = currentWeatherData.main.temp;
+        var windSpeed = currentWeatherData.wind.speed;
+        var humidity = currentWeatherData.main.humidity;
+        var icon = currentWeatherData.weather[0].icon;
+        console.log(currentWeatherData);
+
+        weatherInfo.innerHTML = `<h2>${city} (${currentDate}) <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/> </h2>
+                                <p>Temperature: ${temperature} K</p>
+                                <p>Wind: ${windSpeed} m/s</p>
+                                <p>Humidity: ${humidity}%</p>
+                                5-Day Forecast:`;
+        console.log(forecastData);
+
+        var forecastList = forecastData.list;
+        for (var i = 0; i < forecastList.length; i += 8) {
+        var forecast = forecastList[i];
+        console.log(forecast);
+        var date = new Date(forecast.dt * 1000);
+        var temperature = forecast.main.temp;
+        var windSpeed = forecast.wind.speed;
+        var icon = forecast.weather[0].icon;
+        console.log(icon);
+        weatherInfo.innerHTML += `<br>Date: ${date.toDateString()}<br> <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/>
+                                <p>Temperature: ${temperature} K</p>
+                                <p>Wind: ${windSpeed} m/s</p>
+                                <p>Humidity: ${humidity}%</p>`
+        }
+    }
 
 function updateSearchHistory() {
     var searchHistoryContainer = document.getElementById("searchHistory");
