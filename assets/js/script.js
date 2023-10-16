@@ -82,4 +82,6 @@ function updateSearchHistory() {
         });
         searchHistoryContainer.appendChild(button);
     });
+    // Save searchHistory to localStorage
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 }
