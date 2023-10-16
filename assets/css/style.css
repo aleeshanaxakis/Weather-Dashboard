@@ -14,8 +14,12 @@ aside {
     border: 2px solid black
 }
 
-#forecast {
-
+.forecast-day {
+    background-color: #5620d4;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
 }
 
 .header {

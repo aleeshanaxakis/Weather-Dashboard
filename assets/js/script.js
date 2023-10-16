@@ -61,20 +61,27 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
         console.log(forecastData);
 
         var forecastInfo = document.getElementById("forecast");
+        forecastInfo.innerHTML = `<h2>5-Day Forecast:</h2>`;
+
         var forecastList = forecastData.list;
         for (var i = 0; i < forecastList.length; i += 8) {
-        var forecast = forecastList[i];
-        console.log(forecast);
-        var date = new Date(forecast.dt * 1000);
-        var temperature = forecast.main.temp;
-        var windSpeed = forecast.wind.speed;
-        var icon = forecast.weather[0].icon;
-        console.log(icon);
-        forecastInfo.innerHTML += `<h2> 5-Day Forecast:<br>${date.toDateString()}<br> </h2>
+            var forecast = forecastList[i];
+            var date = new Date(forecast.dt * 1000);
+            var temperature = forecast.main.temp;
+            var windSpeed = forecast.wind.speed;
+            var icon = forecast.weather[0].icon;
+
+        // Create a new div for each day's forecast    
+        var forecastDayDiv = document.createElement("div");
+        forecastDayDiv.classList.add("forecast-day"); 
+        forecastDayDiv.innerHTML += `<h3>${date.toDateString()}</h3>
                                 <img src="https://openweathermap.org/img/wn/${icon}@2x.png"/>
                                 <p>Temperature: ${temperature} K</p>
                                 <p>Wind: ${windSpeed} m/s</p>
-                                <p>Humidity: ${humidity}%</p>`
+                                <p>Humidity: ${humidity}%</p>`;
+        
+        // Append the div to the forecastInfo element
+        forecastInfo.appendChild(forecastDayDiv);
         }
     }
 
