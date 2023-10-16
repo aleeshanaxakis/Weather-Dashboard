@@ -4,6 +4,7 @@
 
 aside {
     width: 25%;
+    margin-right: 20px;
 }
 
 #cityInput {
@@ -19,6 +20,14 @@ aside {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+#searchHistory button {
+    width: 100%;
+    background-color: lightgrey;
+    padding: 10px;
+    margin-bottom: 5px;
 }
 
 #weatherInfo {
