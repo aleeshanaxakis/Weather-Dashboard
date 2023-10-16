@@ -4,7 +4,7 @@
 This weather dashboard website displays the current weather conditions and a weather forecast for the next five days for any city in the world searched for by the user.
 The website saves a search history of cities so the user can view current weather and five-day forecast for any of the cities they have previously searched for from the search history.
 
-// include screenshot
+<img width="955" alt="Screenshot 2023-10-16 215733" src="https://github.com/aleeshanaxakis/Weather-Dashboard/assets/142005319/f876a42f-2f8b-4c49-8d06-e6d830a0de09">
 
 ## User Story
 AS A traveler
