@@ -3,11 +3,11 @@
 }
 
 aside {
-    width: 250px;
+    width: 25%;
 }
 
 #weatherInfo {
-    width: 750px;
+    width: 75%;
 }
 
 #current-weather {
@@ -17,6 +17,7 @@ aside {
 .forecast-day {
     background-color: #5620d4;
     color: white;
+    width: 15%;
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
