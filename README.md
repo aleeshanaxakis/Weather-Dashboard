@@ -22,7 +22,7 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
 ## Installation
-The weather dashboard can be viewed via the deployed URL: 
+The weather dashboard can be viewed via the deployed URL: https://aleeshanaxakis.github.io/Weather-Dashboard/
 
 ## Usage
 Weather dashboards are commonly used by travellers or people with loved ones in other cities.
